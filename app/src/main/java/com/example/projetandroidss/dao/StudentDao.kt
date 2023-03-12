@@ -14,9 +14,5 @@ interface StudentDao {
 
     @Insert
     fun insertStudent(vararg student: Student)
-
-    @Update
-    fun update(vararg student: Student)
-    @Delete
-    fun delete(vararg student: Student)
+    
 }

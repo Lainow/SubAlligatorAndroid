@@ -4,8 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.projetandroidss.dao.LevelDao
-import com.example.projetandroidss.entities.Level
+import com.example.projetandroidss.entities.*
+
+@Database(
+    entities = [Aptitude::class, ContainSkill::class, Content::class, Level::class, Skill::class, Formation::class,
+               Initiator::class, Session::class, Participation::class, Status::class, Student::class, TrainingManager::class],
+    version = 1
+)
 
 abstract class BDD : RoomDatabase() {
     //...

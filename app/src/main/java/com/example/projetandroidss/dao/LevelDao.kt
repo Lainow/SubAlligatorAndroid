@@ -10,6 +10,6 @@ interface LevelDao {
     @Query("SELECT * FROM levels")
     fun getAllLevel(): List<Level>
 
-    @Insert fun insertInitiator(vararg level: Level)
+    @Insert fun insertLevel(vararg level: Level)
 
 }

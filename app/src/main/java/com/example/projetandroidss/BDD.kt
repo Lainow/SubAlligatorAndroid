@@ -6,6 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.projetandroidss.dao.*
 import com.example.projetandroidss.entities.*
+import com.google.gson.Gson
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 
 @Database(
     entities = [Aptitude::class, ContainSkill::class, Content::class, Level::class, Skill::class, Formation::class,
@@ -50,4 +55,5 @@ abstract class BDD : RoomDatabase() {
             return instance!!
         }
     }
+
 }

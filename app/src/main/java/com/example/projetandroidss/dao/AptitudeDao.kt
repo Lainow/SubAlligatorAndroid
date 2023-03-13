@@ -10,5 +10,7 @@ interface AptitudeDao {
     @Query("SELECT * FROM aptitude")
     fun getAllAptitude(): List<Aptitude>
 
-    @Insert fun insertInitiator(vararg aptitude: Aptitude)
+    @Insert fun insertAptitude(vararg aptitude: Aptitude)
+
+    @Insert fun insertAllAptitude(aptitude: List<Aptitude>)
 }

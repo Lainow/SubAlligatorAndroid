@@ -10,7 +10,7 @@ interface FormationDao {
     @Query("SELECT * FROM formation")
     fun getAllFormation(): List<Formation>
 
-    @Insert fun insertInitiator(vararg formation: Formation)
+    @Insert fun insertFormation(vararg formation: Formation)
 
 
 }

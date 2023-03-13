@@ -12,13 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.projetandroidss.entities.Aptitude
+import com.example.projetandroidss.entities.Level
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var ob = JsonService
-        var listAPt = ob.getApti()
         setContent {
             ProjetAndroidSSTheme {
                 // A surface container using the 'background' color from the theme
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    var base = BDD.getInstance(LocalContext.current)
                     Greeting("Android")
                 }
             }

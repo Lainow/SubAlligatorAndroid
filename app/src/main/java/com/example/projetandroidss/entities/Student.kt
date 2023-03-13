@@ -9,14 +9,14 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = Formation::class,
-            parentColumns = ["formationId"],
-            childColumns = ["formation_id"]
+            parentColumns = ["id"],
+            childColumns = ["formationId"]
         )
     ])
 data class Student(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
-    @ColumnInfo(name = "formation_id") val formationId: Int,
+    val formationId: Int,
     val phone: String,
     val deleted: Boolean
 )

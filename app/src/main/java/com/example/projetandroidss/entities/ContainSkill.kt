@@ -5,20 +5,21 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "containSkills",
+@Entity(tableName = "containSkill",
     foreignKeys = [
         ForeignKey(
             entity = Skill::class,
-            parentColumns = ["skillId"],
-            childColumns = ["skill_id"]
+            parentColumns = ["id"],
+            childColumns = ["skillId"]
         ),
         ForeignKey(
             entity = Formation::class,
-            parentColumns = ["formationId"],
-            childColumns = ["formation_id"]
+            parentColumns = ["id"],
+            childColumns = ["formationId"]
         )
     ])
 data class ContainSkill(
-    @ColumnInfo(name = "formation_id") val formationId: Int,
-    @ColumnInfo(name = "skill_id") val skillId: Int
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val formationId: Int,
+    val skillId: Int
 )

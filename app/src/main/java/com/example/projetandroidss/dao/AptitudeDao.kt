@@ -12,5 +12,5 @@ interface AptitudeDao {
 
     @Insert fun insertAptitude(vararg aptitude: Aptitude)
 
-    @Insert fun insertAllAptitude(aptitude: List<Aptitude>)
+    @Insert fun insertAllAptitude(aptitudes: List<Aptitude>)
 }

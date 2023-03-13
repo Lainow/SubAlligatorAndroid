@@ -10,6 +10,6 @@ interface ContentDao {
     @Query("SELECT * FROM content")
     fun getAllContent(): List<Content>
 
-    @Insert fun insertContent(vararg content: Dao)
+    @Insert fun insertContent(vararg content: Content)
 
 }

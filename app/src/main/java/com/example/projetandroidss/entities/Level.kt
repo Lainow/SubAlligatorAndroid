@@ -9,7 +9,7 @@ import com.google.gson.Gson
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Entity(tableName = "levels")
+@Entity(tableName = "level")
 
 data class Level(
     @PrimaryKey val id: Int,

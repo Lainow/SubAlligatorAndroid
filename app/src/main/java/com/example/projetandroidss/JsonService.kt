@@ -11,22 +11,4 @@ public object JsonService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getApti(): ApiServiceApti {
-        return retrofit.create(ApiServiceApti::class.java)
-    }
-}
-
-interface ApiServiceApti {
-    @GET("REST/aptitude/")
-    suspend fun getApt(): List<Aptitude>
-}
-
-interface ApiServiceContainSkill {
-    @GET("REST/containSkill/")
-    suspend fun getCS(): List<ContainSkill>
-}
-
-interface ApiServiceContent {
-    @GET("REST/content/")
-    suspend fun getAPt(): List<Content>
 }

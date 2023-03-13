@@ -8,22 +8,22 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = Content::class,
-            parentColumns = ["contentId"],
-            childColumns = ["content_id"]
+            parentColumns = ["id"],
+            childColumns = ["contentId"]
         ),
         ForeignKey(
             entity = Student::class,
-            parentColumns = ["studentId"],
-            childColumns = ["student_id"]
+            parentColumns = ["id"],
+            childColumns = ["studentId"]
         ),
         ForeignKey(
             entity = Status::class,
-            parentColumns = ["statusId"],
-            childColumns = ["status_id"]
+            parentColumns = ["id"],
+            childColumns = ["statusId"]
         )
     ])
 class Participation(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val contentId: Int,
     val studentId: Int,
     val statusId: Int,

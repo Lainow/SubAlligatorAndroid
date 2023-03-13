@@ -8,12 +8,12 @@ import androidx.room.PrimaryKey
     foreignKeys = [
     ForeignKey(
         entity = Skill::class,
-        parentColumns = ["skillId"],
-        childColumns = ["skill_id"]
+        parentColumns = ["id"],
+        childColumns = ["skillId"]
     )
 ])
 data class Aptitude (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
     val skillId: Int,

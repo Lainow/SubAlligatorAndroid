@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "level")
 
 class Level(
-    @PrimaryKey val id: Int,
+    @PrimaryKey (autoGenerate = true) val id: Int,
     val name: String,
     val deleted: Boolean
 )

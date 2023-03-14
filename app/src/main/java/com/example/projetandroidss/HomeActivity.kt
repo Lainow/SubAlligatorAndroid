@@ -11,13 +11,10 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.SAVED_STATE_REGISTRY_OWNER_KEY
-import com.example.projetandroidss.entities.Level
+import com.example.projetandroidss.entities.*
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
-import com.example.projetandroidss.viewModel.LevelViewModel
+import com.example.projetandroidss.viewModel.*
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,26 +26,62 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val lvlViewModel = LevelViewModel(application)
-                    var list : List<Level>? = lvlViewModel.getAll()
-                    /*Thread {
-                        val lvlViewModel = LevelViewModel(application)
-                        lvlViewModel.insertOne(Level(id = 17, name = "Lvl16", deleted = false))
-                    }.start()*/
+                    //Desinstaller application a chaque 'Run app'
+                    val listLvlApi = LevelViewModel(application).getLevelsApi()
+                    val listStsApi = StatusViewModel(application).getDataApi()
+                    val listFormApi = FormationViewModel(application).getDataApi()
+                    val listInitApi = InitiatorViewModel(application).getDataApi()
+                    val listStudApi = StudentViewModel(application).getDataApi()
+                    Thread {
+                        var lvlViewModel = LevelViewModel(application)
+                        lvlViewModel.insertLevelApi(listLvlApi)
+                        var lvlFormModel = FormationViewModel(application)
+                        lvlFormModel.insertDataApi(listFormApi)
+                        var lvlStsModel = StatusViewModel(application)
+                        lvlStsModel.insertDataApi(listStsApi)
+                        var lvlInitModel = InitiatorViewModel(application)
+                        lvlInitModel.insertDataApi(listInitApi)
+                        var lvlStdModel = StudentViewModel(application)
+                        lvlStdModel.insertDataApi(listStudApi)
+                    }.start()
+                    Thread.sleep(2000)
+
+                    var list : List<Initiator>? = InitiatorViewModel(application).getAll()
+                    Thread.sleep(1000)
                     Row() {
                         Column() {
                             Text(text = "ID")
-                            for (lvl in list!!) {
-                                Text(text = lvl.id.toString())
+                            for (data in list!!) {
+                                Text(text = data.id.toString())
                             }
                         }
                         Column() {
                             Text(text = "Name")
-                            for (lvl in list!!) {
-                                Text(text = lvl.name)
+                            for (data in list!!) {
+                                Text(text = data.name + " " + data.email)
                             }
                         }
                     }
+                    /*Row() {
+                        Column() {
+                            Text(text = "Level")
+                            for (data in listLvlApi) {
+                                Text(text = data.id.toString() + data.name)
+                            }
+                        }
+                        Column() {
+                            Text(text = "Status")
+                            for (data in listStsApi) {
+                                Text(text = data.id.toString() + data.name)
+                            }
+                        }
+                        Column() {
+                            Text(text = "Formation")
+                            for (data in listFormApi) {
+                                Text(text = data.id.toString() + data.name)
+                            }
+                        }
+                    }*/
 
 
                 }

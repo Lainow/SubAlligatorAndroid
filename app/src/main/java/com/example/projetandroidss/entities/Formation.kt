@@ -9,5 +9,4 @@ class Formation(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val deleted: Boolean
-
     )

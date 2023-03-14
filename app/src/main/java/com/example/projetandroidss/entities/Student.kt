@@ -5,14 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "student",
-    foreignKeys = [
-        ForeignKey(
-            entity = Formation::class,
-            parentColumns = ["id"],
-            childColumns = ["formationId"]
-        )
-    ])
+@Entity(tableName = "student")
 class Student(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,

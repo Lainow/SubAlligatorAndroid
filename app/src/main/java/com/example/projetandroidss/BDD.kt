@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.projetandroidss.dao.*
 import com.example.projetandroidss.entities.*
@@ -26,30 +27,27 @@ abstract class BDD : RoomDatabase() {
 
     companion object {
         private var instance: BDD? = null
+        private val MIGRATION_1_6 = object : Migration(1, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+
+            }
+        }
+
         fun getInstance(context: Context): BDD {
-            if (instance == null)
+            if (instance == null) {
                 instance = Room.databaseBuilder(
-                    context,
-                    BDD::class.java, "database.sqlite"
-                ).build()
-            return instance!!
+                    context.applicationContext,
+                    BDD::class.java,
+                    "my-database"
+                ).addMigrations(MIGRATION_1_6).build()
+            }
+            return instance as BDD
         }
-    }
-    fun getInstance(context: Context): BDD {
-        if (instance == null) {
-            instance = Room.databaseBuilder(
-                context.applicationContext,
-                BDD::class.java,
-                "BDD_plongeurs"
-            ).build()
-        }
-        return instance!!
     }
     fun onCreate(db: SupportSQLiteDatabase) {
         Log.d("Room","Création de la base")
         Thread {
             with(instance!!) {
-                //levelDao().insertOne(Level(id = 12, name = "Lvl12", deleted = false))
             }
         }.start()
     }

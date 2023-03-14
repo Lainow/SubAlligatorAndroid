@@ -1,5 +1,6 @@
 package com.example.projetandroidss.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,7 +11,7 @@ import com.example.projetandroidss.entities.Skill
 @Dao
 interface SkillDao {
     @Query("SELECT * FROM skill")
-    fun getAllSkill(): List<Skill>
+    fun getAllSkill(): LiveData<List<Skill>>
 
     @Insert
     fun insertSkill(vararg skill: Skill)

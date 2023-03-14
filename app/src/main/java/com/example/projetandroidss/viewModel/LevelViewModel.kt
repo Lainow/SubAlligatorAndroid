@@ -38,8 +38,8 @@ class LevelViewModel(app: Application) : AndroidViewModel(app) {
     // Cette fonction permet de récupérer tous les niveaux dans la base de données
     // Elle utilise une Thread pour exécuter la requête, car les requêtes sur le thread principal sont interdites
     // Elle retourne un objet LiveData, qui permet de recevoir des mises à jour automatiques lorsque la base de données change
-    fun getAll(): LiveData<List<Level>>? {
-        var liste: LiveData<List<Level>>? = null;
+    fun getAll(): List<Level>? {
+        var liste: List<Level>? = null;
         var thread = Thread() { liste = bdd.levelDao().getAllLevel() }
         thread.start()
         thread.join()

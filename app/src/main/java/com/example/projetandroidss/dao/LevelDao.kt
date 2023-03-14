@@ -9,7 +9,7 @@ import com.example.projetandroidss.entities.Level
 @Dao
 interface LevelDao {
     @Query("SELECT * FROM level")
-    fun getAllLevel(): LiveData<List<Level>>
+    fun getAllLevel(): List<Level>
 
     @Insert fun insert(vararg level: Level)
 

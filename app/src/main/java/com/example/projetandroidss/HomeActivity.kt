@@ -11,13 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.projetandroidss.entities.Aptitude
 import com.example.projetandroidss.entities.Level
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.projetandroidss.viewModel.LevelViewModel
 
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,8 +25,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    var base = BDD.getInstance(LocalContext.current)
+                    var context = LocalContext.current
                     Greeting("Android")
+                    Text(text = "BBBBB " + BDD.getInstance(context))
+                    //val lvlRepository = LevelRepository(application)
+                    //var level = bdd.levelDao().get(12)
+                    //textView.text = level.name
+                    Thread.sleep(1000)
+                    BDD.getInstance(context).levelDao().insertOne(Level(id = 12, name = "Lvl12", deleted = false))
+                    //lvlViewModel.insert(Level(id = 13, name = "Lvl13", deleted = false))
                 }
             }
         }

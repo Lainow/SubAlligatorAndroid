@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
             childColumns = ["formationId"]
         )
     ])
-data class Student(
+class Student(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val formationId: Int,

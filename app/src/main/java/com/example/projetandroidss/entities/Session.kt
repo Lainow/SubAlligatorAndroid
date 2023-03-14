@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
             childColumns = ["formationId"]
         )
     ])
-data class Session(
+class Session(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val date: String,
     val formationId: Int,

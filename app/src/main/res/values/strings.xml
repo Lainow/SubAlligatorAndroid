@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjetAndroidSS</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>

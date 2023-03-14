@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey
         childColumns = ["aptitudeId"]
     )
 ])
-data class Content(
+class Content(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val sessionId: Int,
     val aptitudeId: Int

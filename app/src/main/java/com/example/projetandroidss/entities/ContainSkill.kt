@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey
             childColumns = ["formationId"]
         )
     ])
-data class ContainSkill(
+class ContainSkill(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val formationId: Int,
     val skillId: Int

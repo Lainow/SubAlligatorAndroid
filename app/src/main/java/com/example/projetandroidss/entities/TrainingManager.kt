@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey
             childColumns = ["formationId"]
         )
     ])
-data class TrainingManager(
+class TrainingManager(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val initiatorId: Int,
     val formationId: Int

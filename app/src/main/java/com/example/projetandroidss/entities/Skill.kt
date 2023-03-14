@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
             childColumns = ["levelId"]
         )
     ])
-data class Skill(
+class Skill(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val levelId: Int,

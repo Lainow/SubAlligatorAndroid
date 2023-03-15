@@ -14,5 +14,5 @@ interface StudentDao {
 
     @Insert
     fun insertStudent(vararg student: Student)
-    
+
 }

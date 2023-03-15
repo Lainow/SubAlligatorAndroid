@@ -10,6 +10,6 @@ interface ContentDao {
     @Query("SELECT * FROM content")
     fun getAllContent(): List<Content>
 
-    @Insert fun insertInitiator(vararg content: Content)
+    @Insert fun insertOne(content: Content) : Long
 
 }

@@ -2,10 +2,24 @@ package com.example.projetandroidss.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "containSkills")
-data class ContainSkill(
-    @ColumnInfo(name = "formation_id") val formationId: Int,
-    @ColumnInfo(name = "skill_id") val skillId: Int
+@Entity(tableName = "containSkill",
+    foreignKeys = [
+        ForeignKey(
+            entity = Skill::class,
+            parentColumns = ["id"],
+            childColumns = ["skillId"]
+        ),
+        ForeignKey(
+            entity = Formation::class,
+            parentColumns = ["id"],
+            childColumns = ["formationId"]
+        )
+    ])
+class ContainSkill(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val formationId: Int,
+    val skillId: Int
 )

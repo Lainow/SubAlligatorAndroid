@@ -80,4 +80,20 @@ class InitiatorViewModel(app: Application) : AndroidViewModel(app) {
         thread.join()
         return liste
     }
+
+    fun getByMailPassword(mail: String, password: String): Initiator? {
+        var initiator: Initiator? = null;
+        var thread = Thread() { initiator = bdd.initiatorDao().getByMailPassword(mail, password) }
+        thread.start()
+        thread.join()
+        return initiator
+    }
+
+    fun getById(i: Int): Initiator? {
+        var initiator: Initiator? = null;
+        var thread = Thread() { initiator = bdd.initiatorDao().getById(i) }
+        thread.start()
+        thread.join()
+        return initiator
+    }
 }

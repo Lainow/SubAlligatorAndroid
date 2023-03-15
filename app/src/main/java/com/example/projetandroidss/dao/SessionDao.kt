@@ -12,6 +12,5 @@ interface SessionDao {
     @Query("SELECT * FROM session")
     fun getAllSession(): List<Session>
 
-    @Insert
-    fun insertSession(vararg session: Session)
+    @Insert fun insertOne(session: Session) : Long
 }

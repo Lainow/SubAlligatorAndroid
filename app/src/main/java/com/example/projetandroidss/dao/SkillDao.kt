@@ -11,8 +11,8 @@ import com.example.projetandroidss.entities.Skill
 @Dao
 interface SkillDao {
     @Query("SELECT * FROM skill")
-    fun getAllSkill(): LiveData<List<Skill>>
+    fun getAllSkill(): List<Skill>
 
-    @Insert
-    fun insertSkill(vararg skill: Skill)
+
+    @Insert fun insertOne(skill: Skill) : Long
 }

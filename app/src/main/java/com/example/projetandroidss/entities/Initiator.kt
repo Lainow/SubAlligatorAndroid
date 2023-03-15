@@ -4,7 +4,12 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "initiator")
+@Entity(tableName = "initiator", foreignKeys = [
+        ForeignKey(
+            entity = Level::class,
+            parentColumns = ["id"],
+            childColumns = ["levelId"]
+        )])
 class Initiator(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,

@@ -2,4 +2,5 @@
     <string name="app_name">ProjetAndroidSS</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_second">SecondActivity</string>
 </resources>

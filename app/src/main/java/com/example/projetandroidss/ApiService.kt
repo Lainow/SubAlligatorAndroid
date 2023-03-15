@@ -19,4 +19,25 @@ interface ApiService {
 
     @GET("student/")
     fun getStudent(): Call<List<Student>>
+
+    @GET("skill/")
+    fun getSkill(): Call<List<Skill>>
+
+    @GET("participation/")
+    fun getParticipation(): Call<List<Participation>>
+
+    @GET("containSkill/")
+    fun getContainSkill(): Call<List<ContainSkill>>
+
+    @GET("content/")
+    fun getContent(): Call<List<Content>>
+
+    @GET("session/")
+    fun getSession(): Call<List<Session>>
+
+    @GET("trainingManager/")
+    fun getTrainingManager(): Call<List<TrainingManager>>
+
+    @GET("aptitude/")
+    fun getAptitude(): Call<List<Aptitude>>
 }

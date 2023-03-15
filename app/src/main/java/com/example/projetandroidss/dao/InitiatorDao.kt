@@ -9,6 +9,12 @@ interface InitiatorDao {
     @Query("SELECT * FROM initiator")
     fun getAllInitiator(): List<Initiator>
 
+    @Query("SELECT * FROM initiator where email = :mail AND password = :password")
+    fun getByMailPassword(mail: String, password: String): Initiator
+
+    @Query("SELECT * FROM initiator where id = :id")
+    fun getById(id : Int): Initiator
+
     @Insert fun insertOne(initiator: Initiator) : Long
 
     @Insert fun insert(vararg initiator: Initiator)

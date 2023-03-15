@@ -1,17 +1,23 @@
 package com.example.projetandroidss
 
+import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.example.projetandroidss.dao.AptitudeDao
 import com.example.projetandroidss.entities.*
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
 import com.example.projetandroidss.viewModel.*
@@ -26,64 +32,37 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    //Desinstaller application a chaque 'Run app'
-                    val listLvlApi = LevelViewModel(application).getLevelsApi()
-                    val listStsApi = StatusViewModel(application).getDataApi()
-                    val listFormApi = FormationViewModel(application).getDataApi()
-                    val listInitApi = InitiatorViewModel(application).getDataApi()
-                    val listStudApi = StudentViewModel(application).getDataApi()
-                    Thread {
-                        var lvlViewModel = LevelViewModel(application)
-                        lvlViewModel.insertLevelApi(listLvlApi)
-                        var lvlFormModel = FormationViewModel(application)
-                        lvlFormModel.insertDataApi(listFormApi)
-                        var lvlStsModel = StatusViewModel(application)
-                        lvlStsModel.insertDataApi(listStsApi)
-                        var lvlInitModel = InitiatorViewModel(application)
-                        lvlInitModel.insertDataApi(listInitApi)
-                        var lvlStdModel = StudentViewModel(application)
-                        lvlStdModel.insertDataApi(listStudApi)
-                    }.start()
-                    Thread.sleep(2000)
+                    InsertionDonnees(application = application)
+                    val list: List<Formation>? = FormationViewModel(application).getAll()
+                    val initiateur = InitiatorViewModel(application).getById(1)
 
-                    var list : List<Initiator>? = InitiatorViewModel(application).getAll()
-                    Thread.sleep(1000)
-                    Row() {
-                        Column() {
-                            Text(text = "ID")
-                            for (data in list!!) {
-                                Text(text = data.id.toString())
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Row (modifier = Modifier.fillMaxWidth()){
+                            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                                val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
+                                if (initiateur != null) {
+                                    intent.putExtra("idInitiateur", initiateur.id)
+                                    startActivity(intent)
+                                }
+                            }) {
+                                Text("Profil")
                             }
                         }
-                        Column() {
-                            Text(text = "Name")
-                            for (data in list!!) {
-                                Text(text = data.name + " " + data.email)
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Text(text = "Liste des Formations",
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp
+                            )
+                        }
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Column() {
+                                list?.forEach { data ->
+                                    Text(text = data.name)
+                                }
                             }
                         }
                     }
-                    /*Row() {
-                        Column() {
-                            Text(text = "Level")
-                            for (data in listLvlApi) {
-                                Text(text = data.id.toString() + data.name)
-                            }
-                        }
-                        Column() {
-                            Text(text = "Status")
-                            for (data in listStsApi) {
-                                Text(text = data.id.toString() + data.name)
-                            }
-                        }
-                        Column() {
-                            Text(text = "Formation")
-                            for (data in listFormApi) {
-                                Text(text = data.id.toString() + data.name)
-                            }
-                        }
-                    }*/
-
-
                 }
             }
         }
@@ -91,14 +70,46 @@ class HomeActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun InsertionDonnees(application: Application) {
+    if (AptitudeViewModel(application).count() == 0) {
+        //Desinstaller application a chaque 'Run app'
+        val listLvlApi = LevelViewModel(application).getLevelsApi()
+        val listStsApi = StatusViewModel(application).getDataApi()
+        val listFormApi = FormationViewModel(application).getDataApi()
+        val listInitApi = InitiatorViewModel(application).getDataApi()
+        val listStudApi = StudentViewModel(application).getDataApi()
+        val listSkillApi = SkillViewModel(application).getDataApi()
+        Thread {
+            var lvlViewModel = LevelViewModel(application)
+            lvlViewModel.insertLevelApi(listLvlApi)
+            var lvlFormModel = FormationViewModel(application)
+            lvlFormModel.insertDataApi(listFormApi)
+            var lvlStsModel = StatusViewModel(application)
+            lvlStsModel.insertDataApi(listStsApi)
+        }.start()
+        Thread.sleep(2000)
+        Thread {
+            var lvlInitModel = InitiatorViewModel(application)
+            lvlInitModel.insertDataApi(listInitApi)
+            var lvlStdModel = StudentViewModel(application)
+            lvlStdModel.insertDataApi(listStudApi)
+            var lvlSkillModel = SkillViewModel(application)
+            lvlSkillModel.insertDataApi(listSkillApi)
+        }.start()
+        Thread.sleep(2000)
+        val listAptiApi = AptitudeViewModel(application).getDataApi()
+        Thread {
+            var lvlAptiModel = AptitudeViewModel(application)
+            lvlAptiModel.insertDataApi(listAptiApi)
+        }.start()
+        //Thread.sleep(2000)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ProjetAndroidSSTheme {
-        Greeting("Android")
+
     }
 }

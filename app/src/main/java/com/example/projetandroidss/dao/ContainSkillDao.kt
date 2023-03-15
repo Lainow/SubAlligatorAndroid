@@ -10,5 +10,5 @@ interface ContainSkillDao {
     @Query("SELECT * FROM containSkill")
     fun getAllContainSkill(): List<ContainSkill>
 
-    @Insert fun insertContaiSkill(vararg containSkill: ContainSkill)
+    @Insert fun insertOne(containSkill: ContainSkill) : Long
 }

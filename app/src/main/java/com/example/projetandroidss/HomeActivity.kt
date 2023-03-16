@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -13,9 +14,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.dao.AptitudeDao
 import com.example.projetandroidss.entities.*
@@ -48,16 +51,37 @@ class HomeActivity : ComponentActivity() {
                                 Text("Profil")
                             }
                         }
-                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                            Text(text = "Liste des Formations",
-                                textAlign = TextAlign.Center,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 24.sp
-                            )
-                        }
+                        Text(text = "Liste des Eleves",
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color(0xFF2F1DAF))
+                                .padding(16.dp)
+                        )
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                             Column() {
                                 list?.forEach { data ->
+                                    Text(text = data.name)
+                                }
+                            }
+                        }
+                        Text(text = "Liste des Eleves",
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            color = Color.White,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color(0xFF2F1DAF))
+                                .padding(16.dp)
+                        )
+                        var listStu: List<Student>? = StudentViewModel(application).getAll()
+                        Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                            Column() {
+                                listStu?.forEach { data ->
                                     Text(text = data.name)
                                 }
                             }
@@ -87,7 +111,7 @@ fun InsertionDonnees(application: Application) {
             var lvlStsModel = StatusViewModel(application)
             lvlStsModel.insertDataApi(listStsApi)
         }.start()
-        Thread.sleep(2000)
+        Thread.sleep(1500)
         Thread {
             var lvlInitModel = InitiatorViewModel(application)
             lvlInitModel.insertDataApi(listInitApi)
@@ -96,13 +120,33 @@ fun InsertionDonnees(application: Application) {
             var lvlSkillModel = SkillViewModel(application)
             lvlSkillModel.insertDataApi(listSkillApi)
         }.start()
-        Thread.sleep(2000)
+        Thread.sleep(1500)
         val listAptiApi = AptitudeViewModel(application).getDataApi()
+        val listContainSkillApi = ContainSkillViewModel(application).getDataApi()
+        val listSessionViewModel = SessionViewModel(application).getDataApi()
+        val listTrainingManagerViewModel = TrainingManagerViewModel(application).getDataApi()
         Thread {
             var lvlAptiModel = AptitudeViewModel(application)
             lvlAptiModel.insertDataApi(listAptiApi)
+            var lvlContainSkillModel = ContainSkillViewModel(application)
+            lvlContainSkillModel.insertDataApi(listContainSkillApi)
+            var lvlSessionModel = SessionViewModel(application)
+            lvlSessionModel.insertDataApi(listSessionViewModel)
+            var lvlTrainingManagerModel = TrainingManagerViewModel(application)
+            lvlTrainingManagerModel.insertDataApi(listTrainingManagerViewModel)
         }.start()
-        //Thread.sleep(2000)
+        Thread.sleep(1500)
+        val listContentViewModel = ContentViewModel(application).getDataApi()
+        Thread {
+            var lvlContentModel = ContentViewModel(application)
+            lvlContentModel.insertDataApi(listContentViewModel)
+        }.start()
+        Thread.sleep(1500)
+        val listParticipationViewModel = ParticipationViewModel(application).getDataApi()
+        Thread {
+            var lvlParticipationModel = ParticipationViewModel(application)
+            lvlParticipationModel.insertDataApi(listParticipationViewModel)
+        }.start()
     }
 }
 

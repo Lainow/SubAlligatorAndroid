@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
 
-class MainActivity : ComponentActivity() {
+class StudentInfoActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,15 +22,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+
                 }
             }
         }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun DefaultPreview3() {
+    ProjetAndroidSSTheme {
+        Greeting("Android")
+    }
 }
-

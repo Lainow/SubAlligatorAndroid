@@ -14,6 +14,16 @@
         android:theme="@style/Theme.ProjetAndroidSS"
         tools:targetApi="33">
         <activity
+            android:name=".Login"
+            android:exported="false"
+            android:label="Login"
+            android:theme="@style/Theme.ProjetAndroidSS" />
+        <activity
+            android:name=".StudentInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_student_info"
+            android:theme="@style/Theme.ProjetAndroidSS" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:label="Sub&apos;Alligator"

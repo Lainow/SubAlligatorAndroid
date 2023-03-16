@@ -87,7 +87,7 @@ fun InsertionDonnees(application: Application) {
             var lvlStsModel = StatusViewModel(application)
             lvlStsModel.insertDataApi(listStsApi)
         }.start()
-        Thread.sleep(2000)
+        Thread.sleep(1500)
         Thread {
             var lvlInitModel = InitiatorViewModel(application)
             lvlInitModel.insertDataApi(listInitApi)
@@ -96,13 +96,33 @@ fun InsertionDonnees(application: Application) {
             var lvlSkillModel = SkillViewModel(application)
             lvlSkillModel.insertDataApi(listSkillApi)
         }.start()
-        Thread.sleep(2000)
+        Thread.sleep(1500)
         val listAptiApi = AptitudeViewModel(application).getDataApi()
+        val listContainSkillApi = ContainSkillViewModel(application).getDataApi()
+        val listSessionViewModel = SessionViewModel(application).getDataApi()
+        val listTrainingManagerViewModel = TrainingManagerViewModel(application).getDataApi()
         Thread {
             var lvlAptiModel = AptitudeViewModel(application)
             lvlAptiModel.insertDataApi(listAptiApi)
+            var lvlContainSkillModel = ContainSkillViewModel(application)
+            lvlContainSkillModel.insertDataApi(listContainSkillApi)
+            var lvlSessionModel = SessionViewModel(application)
+            lvlSessionModel.insertDataApi(listSessionViewModel)
+            var lvlTrainingManagerModel = TrainingManagerViewModel(application)
+            lvlTrainingManagerModel.insertDataApi(listTrainingManagerViewModel)
         }.start()
-        //Thread.sleep(2000)
+        Thread.sleep(1500)
+        val listContentViewModel = ContentViewModel(application).getDataApi()
+        Thread {
+            var lvlContentModel = ContentViewModel(application)
+            lvlContentModel.insertDataApi(listContentViewModel)
+        }.start()
+        Thread.sleep(1500)
+        val listParticipationViewModel = ParticipationViewModel(application).getDataApi()
+        Thread {
+            var lvlParticipationModel = ParticipationViewModel(application)
+            lvlParticipationModel.insertDataApi(listParticipationViewModel)
+        }.start()
     }
 }
 

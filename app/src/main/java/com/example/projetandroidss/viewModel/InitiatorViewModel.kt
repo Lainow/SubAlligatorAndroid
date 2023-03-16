@@ -70,6 +70,13 @@ class InitiatorViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun update(obj: Initiator) {
+        Thread() {
+        viewModelScope.launch {
+            bdd.initiatorDao().update(obj)
+        }}.start()
+    }
+
     // Cette fonction permet de récupérer tous les niveaux dans la base de données
     // Elle utilise une Thread pour exécuter la requête, car les requêtes sur le thread principal sont interdites
     // Elle retourne un objet LiveData, qui permet de recevoir des mises à jour automatiques lorsque la base de données change

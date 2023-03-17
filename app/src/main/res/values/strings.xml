@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">ProjetAndroidSS</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_second">SecondActivity</string>
-    <string name="title_activity_student_info">StudentInfoActivity</string>
+    <string name="title_activity_compose">COmposeActivity</string>
 </resources>

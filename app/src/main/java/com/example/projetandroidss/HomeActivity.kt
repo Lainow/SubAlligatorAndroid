@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,11 +39,16 @@ class HomeActivity : ComponentActivity() {
                 ) {
                     val list: List<Formation>? = FormationViewModel(application).getAll()
                     val initiateur = InitiatorViewModel(application).getById(1)
+                    val deepBlue = Color(0xFF004794)
 
-                    Box(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                    Box(modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())) {
                         Column(modifier = Modifier.fillMaxWidth()) {
                             Row (modifier = Modifier.fillMaxWidth()) {
-                                Button(modifier = Modifier.fillMaxWidth().background(Color.White), onClick = {
+                                Button(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(deepBlue), onClick = {
                                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                                     if (initiateur != null) {
                                         intent.putExtra("idInitiateur", initiateur.id)
@@ -51,7 +58,9 @@ class HomeActivity : ComponentActivity() {
                                     Text("Mon Profil")
                                 }
                             }
-                            Row (modifier = Modifier.fillMaxWidth().background(Color(0xFF2F1DAF))
+                            Row (modifier = Modifier
+                                .fillMaxWidth()
+                                .background(deepBlue)
                                 .padding(16.dp)) {
                                 Text(
                                     text = "Liste des Formations",
@@ -63,7 +72,9 @@ class HomeActivity : ComponentActivity() {
                                         .fillMaxWidth()
                                 )
                             }
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp), horizontalArrangement = Arrangement.Center) {
                                 Column() {
                                     list?.forEach { data ->
                                         Text(text = data.name)
@@ -77,19 +88,32 @@ class HomeActivity : ComponentActivity() {
                                 color = Color.White,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(Color(0xFF2F1DAF))
+                                    .background(deepBlue)
                                     .padding(16.dp)
                             )
                             var listStu: List<Student>? = StudentViewModel(application).getAll()
-                            Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                            Column(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(25.dp)) {
                                 listStu?.forEach { data ->
-                                    Text(text = data.name)
-                                    Button(modifier = Modifier.fillMaxWidth().background(Color.White), onClick = {
-                                        val intent = Intent(this@HomeActivity, StudentInfoActivity::class.java)
-                                        intent.putExtra("idStudent", data.id)
-                                        startActivity(intent)
-                                    }) {
-                                        Text("Details")
+                                    Row(modifier = Modifier
+                                        .fillMaxWidth()
+                                        .border(1.dp, Color.Gray), verticalAlignment = Alignment.CenterVertically) {
+                                        Column(modifier = Modifier.fillMaxWidth(0.65f)) {
+                                            Text(text = data.name, modifier = Modifier.padding(end = 16.dp, start = 16.dp))
+                                        }
+                                        Column(modifier = Modifier.fillMaxWidth().padding(end = 5.dp)) {
+                                            Button(modifier = Modifier.fillMaxWidth(),onClick = {
+                                                val intent = Intent(
+                                                    this@HomeActivity,
+                                                    StudentInfoActivity::class.java
+                                                )
+                                                intent.putExtra("idStudent", data.id)
+                                                startActivity(intent)
+                                            }) {
+                                                Text("Details")
+                                            }
+                                        }
                                     }
                                 }
                             }

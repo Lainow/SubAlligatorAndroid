@@ -24,6 +24,8 @@ import com.example.projetandroidss.entities.Initiator
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
 import com.example.projetandroidss.viewModel.InitiatorViewModel
 
+val deepBlue = Color(0xFF004794)
+
 class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +56,13 @@ fun AffichageProfil(initiator : Initiator?) {
                 color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF2F1DAF))
+                    .background(deepBlue)
                     .padding(16.dp)
             )
             if (initiator != null) {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
-                    modifier = Modifier.fillMaxWidth().background(Color(0xFFEEEEEE)).border(1.dp, Color.Gray)
+                    modifier = Modifier.fillMaxWidth().background(Color(0xFFEFEFEF)).border(1.dp, Color.Gray)
                 ) {
                     item {
                         Box(modifier =

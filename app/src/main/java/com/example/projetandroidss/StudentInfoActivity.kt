@@ -43,6 +43,8 @@ class StudentInfoActivity : ComponentActivity() {
 
 @Composable
 fun InfoStudent(student : Student?) {
+
+    val deepBlue = Color(0xFF004794)
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
         Column() {
             if (student != null) {
@@ -54,7 +56,7 @@ fun InfoStudent(student : Student?) {
                     color = Color.White,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color(0xFF2F1DAF))
+                        .background(deepBlue)
                         .padding(16.dp)
                 )
 

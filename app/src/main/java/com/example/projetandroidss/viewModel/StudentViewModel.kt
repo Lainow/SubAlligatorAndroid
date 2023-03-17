@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.projetandroidss.ApiService
 import com.example.projetandroidss.BDD
+import com.example.projetandroidss.entities.Initiator
 import com.example.projetandroidss.entities.Student
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
@@ -79,5 +80,13 @@ class StudentViewModel(app: Application) : AndroidViewModel(app) {
         thread.start()
         thread.join()
         return liste
+    }
+
+    fun getById(i: Int): Student? {
+        var student: Student? = null;
+        var thread = Thread() { student = bdd.studentDao().getById(i) }
+        thread.start()
+        thread.join()
+        return student
     }
 }

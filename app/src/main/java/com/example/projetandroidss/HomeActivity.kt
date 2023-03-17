@@ -35,7 +35,6 @@ class HomeActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background,
 
                 ) {
-                    InsertionDonnees(application = application)
                     val list: List<Formation>? = FormationViewModel(application).getAll()
                     val initiateur = InitiatorViewModel(application).getById(1)
 
@@ -102,62 +101,7 @@ class HomeActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun InsertionDonnees(application: Application) {
-    if (AptitudeViewModel(application).count() == 0) {
-        //Desinstaller application a chaque 'Run app'
-        val listLvlApi = LevelViewModel(application).getLevelsApi()
-        val listStsApi = StatusViewModel(application).getDataApi()
-        val listFormApi = FormationViewModel(application).getDataApi()
-        val listInitApi = InitiatorViewModel(application).getDataApi()
-        val listStudApi = StudentViewModel(application).getDataApi()
-        val listSkillApi = SkillViewModel(application).getDataApi()
-        Thread {
-            var lvlViewModel = LevelViewModel(application)
-            lvlViewModel.insertLevelApi(listLvlApi)
-            var lvlFormModel = FormationViewModel(application)
-            lvlFormModel.insertDataApi(listFormApi)
-            var lvlStsModel = StatusViewModel(application)
-            lvlStsModel.insertDataApi(listStsApi)
-        }.start()
-        Thread.sleep(1500)
-        Thread {
-            var lvlInitModel = InitiatorViewModel(application)
-            lvlInitModel.insertDataApi(listInitApi)
-            var lvlStdModel = StudentViewModel(application)
-            lvlStdModel.insertDataApi(listStudApi)
-            var lvlSkillModel = SkillViewModel(application)
-            lvlSkillModel.insertDataApi(listSkillApi)
-        }.start()
-        Thread.sleep(1500)
-        val listAptiApi = AptitudeViewModel(application).getDataApi()
-        val listContainSkillApi = ContainSkillViewModel(application).getDataApi()
-        val listSessionViewModel = SessionViewModel(application).getDataApi()
-        val listTrainingManagerViewModel = TrainingManagerViewModel(application).getDataApi()
-        Thread {
-            var lvlAptiModel = AptitudeViewModel(application)
-            lvlAptiModel.insertDataApi(listAptiApi)
-            var lvlContainSkillModel = ContainSkillViewModel(application)
-            lvlContainSkillModel.insertDataApi(listContainSkillApi)
-            var lvlSessionModel = SessionViewModel(application)
-            lvlSessionModel.insertDataApi(listSessionViewModel)
-            var lvlTrainingManagerModel = TrainingManagerViewModel(application)
-            lvlTrainingManagerModel.insertDataApi(listTrainingManagerViewModel)
-        }.start()
-        Thread.sleep(1500)
-        val listContentViewModel = ContentViewModel(application).getDataApi()
-        Thread {
-            var lvlContentModel = ContentViewModel(application)
-            lvlContentModel.insertDataApi(listContentViewModel)
-        }.start()
-        Thread.sleep(1500)
-        val listParticipationViewModel = ParticipationViewModel(application).getDataApi()
-        Thread {
-            var lvlParticipationModel = ParticipationViewModel(application)
-            lvlParticipationModel.insertDataApi(listParticipationViewModel)
-        }.start()
-    }
-}
+
 
 @Preview(showBackground = true)
 @Composable

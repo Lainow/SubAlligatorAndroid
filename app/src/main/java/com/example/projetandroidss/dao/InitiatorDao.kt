@@ -20,7 +20,8 @@ interface InitiatorDao {
     @Insert fun insert(vararg initiator: Initiator)
 
     @Update
-    fun update(vararg initiator: Initiator)
+    fun update(initiator: Initiator) : Int
+
     @Delete
     fun delete(vararg initiator: Initiator)
 

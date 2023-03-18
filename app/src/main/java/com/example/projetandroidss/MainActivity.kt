@@ -1,36 +1,18 @@
 package com.example.projetandroidss
 
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
+import android.widget.Button
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ProjetAndroidSSTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+        setContentView(R.layout.activity_main)
+        val button2 = findViewById<Button>(R.id.button)
+        button2.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-

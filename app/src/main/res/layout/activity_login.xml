@@ -22,8 +22,8 @@
         android:ems="10"
         android:hint="Mot de passe"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="334dp" />
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="343dp" />
 
     <EditText
         android:id="@+id/emailLogin"
@@ -32,15 +32,33 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteX="120dp"
         tools:layout_editor_absoluteY="266dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Se connecter"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="421dp" />
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="417dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mot de passe :"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="354dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Identifiant :"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="277dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

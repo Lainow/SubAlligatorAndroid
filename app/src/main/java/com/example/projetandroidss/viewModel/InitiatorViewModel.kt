@@ -72,9 +72,7 @@ class InitiatorViewModel(app: Application) : AndroidViewModel(app) {
 
     fun update(obj: Initiator) {
         Thread() {
-        viewModelScope.launch {
-            bdd.initiatorDao().update(obj)
-        }}.start()
+            bdd.initiatorDao().update(obj)}.start()
     }
 
     // Cette fonction permet de récupérer tous les niveaux dans la base de données

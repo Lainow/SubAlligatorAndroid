@@ -77,4 +77,12 @@ class StatusViewModel (app: Application) : AndroidViewModel(app) {
         thread.join()
         return liste
     }
+
+    fun getById(id: Int): Status? {
+        var status: Status? = null;
+        var thread = Thread() { status = bdd.statusDao().getById(id) }
+        thread.start()
+        thread.join()
+        return status
+    }
 }

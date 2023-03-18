@@ -13,4 +13,7 @@ interface SessionDao {
     fun getAllSession(): List<Session>
 
     @Insert fun insertOne(session: Session) : Long
+
+    @Query("SELECT * FROM session where formationId = :formationId")
+    fun getByFormationId(formationId: Int): List<Session>
 }

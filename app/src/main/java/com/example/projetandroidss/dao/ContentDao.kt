@@ -12,4 +12,7 @@ interface ContentDao {
 
     @Insert fun insertOne(content: Content) : Long
 
+    @Query("SELECT * FROM content where sessionId = :sessionId order by aptitudeId")
+    fun getBySessionId(sessionId: Int): List<Content>
+
 }

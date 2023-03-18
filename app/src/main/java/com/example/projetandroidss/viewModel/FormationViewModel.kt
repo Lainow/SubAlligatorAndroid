@@ -80,4 +80,12 @@ class FormationViewModel(app: Application) : AndroidViewModel(app) {
         thread.join()
         return liste
     }
+
+    fun getById(id: Int): Formation {
+        var formation: Formation? = null;
+        var thread = Thread() { formation = bdd.formationDao().getById(id) }
+        thread.start()
+        thread.join()
+        return formation!!
+    }
 }

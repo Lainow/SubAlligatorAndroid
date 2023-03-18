@@ -15,6 +15,9 @@ interface FormationDao {
 
     @Insert fun insert(vararg formation: Formation)
 
+    @Query("SELECT * FROM formation where id = :id")
+    fun getById(id: Int): Formation
+
 
 
 }

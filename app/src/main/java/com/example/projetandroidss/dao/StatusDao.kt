@@ -17,4 +17,7 @@ interface StatusDao {
 
     @Insert fun insertOne(status: Status) : Long
 
+    @Query("SELECT * FROM status where id = :id")
+    fun getById(id: Int): Status
+
 }

@@ -63,5 +63,13 @@ class ParticipationViewModel (app: Application) : AndroidViewModel(app) {
         return liste
     }
 
+    fun getByStudentAndContentId(studentId: Int, contentId: Int): List<Participation>? {
+        var liste: List<Participation>? = null;
+        var thread = Thread() { liste = bdd.participationDao().getByStudentAndContentId(studentId, contentId) }
+        thread.start()
+        thread.join()
+        return liste
+    }
+
 
 }

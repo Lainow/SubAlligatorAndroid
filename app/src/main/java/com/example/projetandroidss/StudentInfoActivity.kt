@@ -52,7 +52,7 @@ class StudentInfoActivity : ComponentActivity() {
                                     Column() {
 
                                         Text(
-                                            text = "Détails sur " + student.name,
+                                            text = "Progression de " + student.name,
                                             textAlign = TextAlign.Center,
                                             fontWeight = FontWeight.Bold,
                                             fontSize = 20.sp,
@@ -74,11 +74,22 @@ class StudentInfoActivity : ComponentActivity() {
                                         var formationStudent =
                                             FormationViewModel(application).getById(student.formationId)
                                         Row(
-                                            modifier = Modifier.fillMaxWidth().padding(15.dp),
+                                            modifier = Modifier.fillMaxWidth(),
                                             horizontalArrangement = Arrangement.Center
                                         ) {
                                             Text(
-                                                text = "Formation : " + formationStudent.name,
+                                                text = "Formation",
+                                                textAlign = TextAlign.Center,
+                                                fontSize = 17.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        }
+                                        Row(
+                                            modifier = Modifier.fillMaxWidth().padding(10.dp),
+                                            horizontalArrangement = Arrangement.Center
+                                        ) {
+                                            Text(
+                                                text = formationStudent.name,
                                                 textAlign = TextAlign.Center,
                                                 fontWeight = FontWeight.Bold
                                             )
@@ -88,7 +99,9 @@ class StudentInfoActivity : ComponentActivity() {
                                                 .border(
                                                     1.dp,
                                                     Color.Gray
-                                                )
+                                                ).background(Color.LightGray),
+                                            horizontalArrangement = Arrangement.Center,
+                                            verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             Column(
                                                 modifier = Modifier.fillMaxWidth(

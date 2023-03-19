@@ -63,4 +63,12 @@ class ContentViewModel (app: Application) : AndroidViewModel(app) {
         return liste
     }
 
+    fun getBySessionId(sessionId: Int): List<Content>? {
+        var liste: List<Content>? = null;
+        var thread = Thread() { liste = bdd.contentDao().getBySessionId(sessionId) }
+        thread.start()
+        thread.join()
+        return liste
+    }
+
 }

@@ -62,4 +62,12 @@ class SessionViewModel  (app: Application) : AndroidViewModel(app) {
         thread.join()
         return liste
     }
+
+    fun getByFormationId(formationId: Int): List<Session>? {
+        var liste: List<Session>? = null;
+        var thread = Thread() { liste = bdd.sessionDao().getByFormationId(formationId) }
+        thread.start()
+        thread.join()
+        return liste
+    }
 }

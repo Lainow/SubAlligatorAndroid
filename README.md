@@ -19,4 +19,4 @@ Liste des séances
 **Accès au serveur**
 Récupérer les trois listes (-> BDD locale) ✅
 Valider Login
-Modifier profil 
+Modifier profil ✅

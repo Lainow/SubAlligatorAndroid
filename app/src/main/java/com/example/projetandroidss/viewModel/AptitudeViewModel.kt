@@ -75,4 +75,12 @@ class AptitudeViewModel (app: Application) : AndroidViewModel(app) {
         thread.join()
         return count
     }
+
+    fun getById(id: Int) : Aptitude {
+        var aptitude: Aptitude? = null
+        var thread = Thread() { aptitude = bdd.aptitudeDao().getById(id) }
+        thread.start()
+        thread.join()
+        return aptitude!!
+    }
 }

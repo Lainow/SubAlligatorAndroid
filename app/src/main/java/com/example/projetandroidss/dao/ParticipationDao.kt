@@ -12,4 +12,7 @@ interface ParticipationDao {
 
     @Insert
     fun insertOne(participation: Participation) : Long
+
+    @Query("SELECT * FROM participation where studentId = :studentId and contentId = :contentId")
+    fun getByStudentAndContentId(studentId: Int, contentId: Int): List<Participation>
 }

@@ -17,4 +17,7 @@ interface AptitudeDao {
     @Insert fun insertOne(aptitude: Aptitude) : Long
 
     @Insert fun insertAllAptitude(aptitudes: List<Aptitude>)
+
+    @Query("SELECT * FROM aptitude where id = :id")
+    fun getById(id: Int): Aptitude
 }

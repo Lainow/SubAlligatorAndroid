@@ -36,20 +36,23 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background,
 
-                ) {
-                    val list: List<Formation>? = FormationViewModel(application).getAll()
+                    ) {
+                    val listFo: List<Formation>? = FormationViewModel(application).getAll()
                     val initiateur = InitiatorViewModel(application).getById(1)
                     val deepBlue = Color(0xFF004794)
 
-                    Box(modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState())
+                    ) {
                         Column(modifier = Modifier.fillMaxWidth()) {
-                            Row (modifier = Modifier.fillMaxWidth()) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
                                 Button(modifier = Modifier
                                     .fillMaxWidth()
                                     .background(deepBlue), onClick = {
-                                    val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
+                                    val intent =
+                                        Intent(this@HomeActivity, ProfileActivity::class.java)
                                     if (initiateur != null) {
                                         intent.putExtra("idInitiateur", initiateur.id)
                                         startActivity(intent)
@@ -58,10 +61,12 @@ class HomeActivity : ComponentActivity() {
                                     Text("Mon Profil")
                                 }
                             }
-                            Row (modifier = Modifier
-                                .fillMaxWidth()
-                                .background(deepBlue)
-                                .padding(16.dp)) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(deepBlue)
+                                    .padding(16.dp)
+                            ) {
                                 Text(
                                     text = "Liste des Formations",
                                     textAlign = TextAlign.Center,
@@ -72,49 +77,95 @@ class HomeActivity : ComponentActivity() {
                                         .fillMaxWidth()
                                 )
                             }
-                            Row(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp), horizontalArrangement = Arrangement.Center) {
-                                Column() {
-                                    list?.forEach { data ->
-                                        Text(text = data.name)
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(25.dp)
+                            ) {
+                                listFo?.forEach { data ->
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .border(1.dp, Color.Gray),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column(modifier = Modifier.fillMaxWidth(0.65f)) {
+                                            Text(
+                                                text = data.name,
+                                                modifier = Modifier.padding(
+                                                    end = 10.dp,
+                                                    start = 10.dp
+                                                )
+                                            )
+                                        }
+                                        Column(
+                                            modifier = Modifier.fillMaxWidth().padding(end = 5.dp)
+                                        ) {
+                                            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                                                val intentSe = Intent(
+                                                    this@HomeActivity,
+                                                    SessionActivity::class.java
+                                                )
+                                                intentSe.putExtra("idFormation", data.id)
+                                                startActivity(intentSe)
+                                            }) {
+                                                Text("Session")
+                                            }
+                                        }
                                     }
                                 }
                             }
-                            Text(text = "Liste des Eleves",
-                                textAlign = TextAlign.Center,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 20.sp,
-                                color = Color.White,
+                            Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .background(deepBlue)
                                     .padding(16.dp)
-                            )
-                            var listStu: List<Student>? = StudentViewModel(application).getAll()
-                            Column(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(25.dp)) {
-                                listStu?.forEach { data ->
-                                    Row(modifier = Modifier
+                            ) {
+                                Text(
+                                    text = "Liste des Eleves",
+                                    textAlign = TextAlign.Center,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 20.sp,
+                                    color = Color.White,
+                                    modifier = Modifier
                                         .fillMaxWidth()
-                                        .border(1.dp, Color.Gray), verticalAlignment = Alignment.CenterVertically) {
+                                        .background(deepBlue)
+                                        .padding(16.dp)
+                                )
+                            }
+                            var listStu: List<Student>? = StudentViewModel(application).getAll()
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(25.dp)
+                            ) {
+                                listStu?.forEach { data ->
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .border(1.dp, Color.Gray),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
                                         Column(modifier = Modifier.fillMaxWidth(0.65f)) {
-                                            Text(text = data.name, modifier = Modifier.padding(end = 16.dp, start = 16.dp))
+                                            Text(
+                                                text = data.name,
+                                                modifier = Modifier.padding(end = 16.dp, start = 16.dp)
+                                            )
                                         }
                                         Column(modifier = Modifier.fillMaxWidth().padding(end = 5.dp)) {
-                                            Button(modifier = Modifier.fillMaxWidth(),onClick = {
-                                                val intent = Intent(
+                                            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                                                val intentStu = Intent(
                                                     this@HomeActivity,
                                                     StudentInfoActivity::class.java
                                                 )
-                                                intent.putExtra("idStudent", data.id)
-                                                startActivity(intent)
+                                                intentStu.putExtra("idStudent", data.id)
+                                                startActivity(intentStu)
                                             }) {
                                                 Text("Details")
                                             }
                                         }
                                     }
+
                                 }
                             }
                         }

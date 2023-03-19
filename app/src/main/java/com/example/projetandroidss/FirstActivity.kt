@@ -29,7 +29,7 @@ class FirstActivity : ComponentActivity() {
                 ) {
                     InsertionDonnees(application = application)
                     Button(modifier = Modifier.fillMaxWidth(), onClick = {
-                        val intent = Intent(this@FirstActivity, MainActivity::class.java)
+                        val intent = Intent(this@FirstActivity, LoginActivity::class.java)
                         startActivity(intent)
                     }
                     ) {

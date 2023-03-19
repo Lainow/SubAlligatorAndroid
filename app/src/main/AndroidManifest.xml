@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Login"
+            android:exported="false"
+            android:label="Login"
+            android:theme="@style/Theme.ProjetAndroidSS"/>
+        <activity
             android:name=".HomeActivity"
             android:exported="false"
             android:label="HomeActivity"

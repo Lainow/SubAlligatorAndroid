@@ -6,59 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="105dp"
-        android:layout_height="44dp"
-        android:text="Connexion"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="183dp" />
-
     <EditText
         android:id="@+id/mdpLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="100dp"
+        android:drawableStart="@drawable/ic_password"
         android:ems="10"
         android:hint="Mot de passe"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="343dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
     <EditText
         android:id="@+id/emailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="102dp"
+        android:layout_marginEnd="100dp"
+        android:drawableStart="@drawable/ic_user"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="266dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/loginBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="266dp"
         android:text="Se connecter"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="417dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mdpLogin" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="272dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/videText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mot de passe :"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="199dp"
+        android:text="Veuillez remplir les champs"
+        android:textColor="#EA0303"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="354dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Identifiant :"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="277dp" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

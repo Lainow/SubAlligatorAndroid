@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.entities.Initiator
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
 import com.example.projetandroidss.viewModel.InitiatorViewModel
+import com.example.projetandroidss.viewModel.SessionViewModel
 
 class SessionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,8 @@ class SessionActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val idFrom = intent.getSerializableExtra("idFormation") as Int
+                    val sessionFom = SessionViewModel(application).getByFormationId(idFrom)
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -72,32 +75,77 @@ class SessionActivity : ComponentActivity() {
                                     .fillMaxWidth()
                                     .padding(20.dp)
                             ) {
-                                Row(
-                                    modifier = modifRow,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth(0.35f)
-                                            .padding(16.dp)
+                                if (sessionFom != null) {
+                                    Row(
+                                        modifier = modifRow.background(Color.LightGray),
+                                        verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        affichageTexte("Nom : ")
-                                    }
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(end = 5.dp)
-                                    ) {
-                                        Text(
-                                            text = "test",
-                                            textAlign = TextAlign.Center,
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 20.sp,
-                                            color = Color.Black,
+                                        Column(
                                             modifier = Modifier
                                                 .fillMaxWidth()
-                                                .padding(16.dp)
-                                        )
+                                                .padding(end = 5.dp)
+                                        ) {
+                                            Text(
+                                                text = "DATE",
+                                                textAlign = TextAlign.Center,
+                                                fontWeight = FontWeight.Bold,
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(16.dp)
+                                            )
+                                        }
+                                    }
+                                    if (!sessionFom.isEmpty()) {
+
+                                        sessionFom.forEach { data ->
+                                            val parties = (data.date).split("-")
+                                            val annee = parties[0]
+                                            val mois = parties[1]
+                                            val jourT = parties[2]
+                                            val partiesJ = (jourT).split("T")
+                                            val jour = partiesJ[0]
+                                            Row(
+                                                modifier = modifRow,
+                                                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+                                            ) {
+                                                Column(
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(end = 5.dp)
+                                                ) {
+                                                    Text(
+                                                        text = jour + "/" + mois + "/" + annee,
+                                                        textAlign = TextAlign.Center,
+                                                        modifier = Modifier
+                                                            .fillMaxWidth()
+                                                            .padding(16.dp)
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        Row(
+                                            modifier = modifRow,
+                                            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+                                        ) {
+                                            Column(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(end = 5.dp)
+                                            ) {
+                                                Text(
+                                                    text = "Aucune seance disponible pour cette formation",
+                                                    textAlign = TextAlign.Center,
+                                                    fontWeight = FontWeight.Bold,
+                                                    fontSize = 18.sp,
+                                                    color = Color.Red,
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(16.dp)
+                                                )
+                                            }
+                                        }
                                     }
                                 }
                             }

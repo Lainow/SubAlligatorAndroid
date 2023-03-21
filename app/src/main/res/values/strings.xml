@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SubAlligator</string>
+    <string name="app_name">SubAlligators</string>
     <string name="title_activity_compose">HomeActivity</string>
     <string name="title_activity_first">FirstActivity</string>
     <string name="title_activity_session">SessionActivity</string>

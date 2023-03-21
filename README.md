@@ -15,8 +15,8 @@ Navigation entre les pages ✅
 Liste des formations ✅
 Liste des étudiants ✅
 Liste des séances 
-Évaluations
+Évaluations ✅
 **Accès au serveur**
 Récupérer les trois listes (-> BDD locale) ✅
-Valider Login
-Modifier profil ✅
+Valider Login ✅
+Modifier profil 

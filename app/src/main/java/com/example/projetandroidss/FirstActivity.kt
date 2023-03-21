@@ -33,7 +33,7 @@ class FirstActivity : ComponentActivity() {
                         startActivity(intent)
                     }
                     ) {
-                        Text("Connexion Sub'Alligator",
+                        Text("Connexion Sub'Alligators",
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.Bold,
                             fontSize = 35.sp,

@@ -109,7 +109,7 @@ class HomeActivity : ComponentActivity() {
                                                 intentSe.putExtra("idFormation", data.id)
                                                 startActivity(intentSe)
                                             }) {
-                                                Text("Session")
+                                                Text("Seances")
                                             }
                                         }
                                     }
@@ -161,7 +161,67 @@ class HomeActivity : ComponentActivity() {
                                                 intentStu.putExtra("idStudent", data.id)
                                                 startActivity(intentStu)
                                             }) {
-                                                Text("Details")
+                                                Text("Détails")
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(deepBlue)
+                                    .padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "Liste des Seances",
+                                    textAlign = TextAlign.Center,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 20.sp,
+                                    color = Color.White,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(deepBlue)
+                                        .padding(16.dp)
+                                )
+                            }
+                            var listSession: List<Session>? = SessionViewModel(application).getAll()
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(25.dp)
+                            ) {
+                                listSession?.forEach { data ->
+                                    val parties = (data.date).split("-")
+                                    val annee = parties[0]
+                                    val mois = parties[1]
+                                    val jourT = parties[2]
+                                    val partiesJ = (jourT).split("T")
+                                    val jour = partiesJ[0]
+
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .border(1.dp, Color.Gray),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column(modifier = Modifier.fillMaxWidth(0.55f)) {
+                                            Text(
+                                                text = jour + "/" + mois + "/" + annee,
+                                                modifier = Modifier.padding(end = 16.dp, start = 16.dp)
+                                            )
+                                        }
+                                        Column(modifier = Modifier.fillMaxWidth().padding(end = 5.dp)) {
+                                            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                                                val intentSession = Intent(
+                                                    this@HomeActivity,
+                                                    SessionActivity::class.java
+                                                )
+                                                intentSession.putExtra("idSession", data.id)
+                                                startActivity(intentSession)
+                                            }) {
+                                                Text("Plus d'info")
                                             }
                                         }
                                     }

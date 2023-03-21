@@ -70,4 +70,12 @@ class SessionViewModel  (app: Application) : AndroidViewModel(app) {
         thread.join()
         return liste
     }
+
+    fun getById(sessionId: Int): Session? {
+        var liste: Session? = null;
+        var thread = Thread() { liste = bdd.sessionDao().getByID(sessionId) }
+        thread.start()
+        thread.join()
+        return liste
+    }
 }

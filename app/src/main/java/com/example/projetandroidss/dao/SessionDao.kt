@@ -16,4 +16,7 @@ interface SessionDao {
 
     @Query("SELECT * FROM session where formationId = :formationId")
     fun getByFormationId(formationId: Int): List<Session>
+
+    @Query("SELECT * FROM session where id = :sessionId")
+    fun getByID(sessionId: Int): Session
 }

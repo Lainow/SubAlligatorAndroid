@@ -214,12 +214,12 @@ class HomeActivity : ComponentActivity() {
                                         }
                                         Column(modifier = Modifier.fillMaxWidth().padding(end = 5.dp)) {
                                             Button(modifier = Modifier.fillMaxWidth(), onClick = {
-                                                val intentSession = Intent(
+                                                val intentSessionFormation = Intent(
                                                     this@HomeActivity,
-                                                    SessionActivity::class.java
+                                                    SessionFormationActivity::class.java
                                                 )
-                                                intentSession.putExtra("idSession", data.id)
-                                                startActivity(intentSession)
+                                                intentSessionFormation.putExtra("idSession", data.id)
+                                                startActivity(intentSessionFormation)
                                             }) {
                                                 Text("Plus d'info")
                                             }

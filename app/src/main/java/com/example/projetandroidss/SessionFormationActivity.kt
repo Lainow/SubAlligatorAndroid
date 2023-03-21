@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
-import com.example.projetandroidss.viewModel.SessionViewModel
+import com.example.projetandroidss.viewModel.*
 
 class SessionFormationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +36,15 @@ class SessionFormationActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val idSess = intent.getSerializableExtra("idSession") as Int
-                    val sessionFom = SessionViewModel(application).getById(idSess)
+                    val sessionForm = SessionViewModel(application).getById(idSess)
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .verticalScroll(rememberScrollState())
                     ) {
+                        val idStudent = intent.getSerializableExtra("idStudent") as? Int
+                        val student = StudentViewModel(application).getById(idStudent!!)
+
                         var modifRow = Modifier
                             .fillMaxWidth()
                             .border(1.dp, Color.Gray)
@@ -72,7 +75,7 @@ class SessionFormationActivity : ComponentActivity() {
                                     .fillMaxWidth()
                                     .padding(20.dp)
                             ) {
-                                if (sessionFom != null) {
+                                if (sessionForm != null) {
                                     Row(
                                         modifier = modifRow.background(Color.LightGray),
                                         verticalAlignment = Alignment.CenterVertically
@@ -107,8 +110,72 @@ class SessionFormationActivity : ComponentActivity() {
                                                     .padding(16.dp)
                                             )
                                         }
+                                        if (sessionForm != null){
+                                            var formStudent = StudentViewModel(application).getById(formation.studentId)
+                                        }
+                                        var partiStudent =
+                                            ParticipationViewModel(application).getByStudentAndContentId(
+                                                student.id,
+                                                content.id
+                                            )
+                                        if (partiStudent != null) {
+                                            for (parti in partiStudent) {
+                                                var statusForm =
+                                                    StatusViewModel(application).getById(
+                                                        parti.statusId
+                                                    )
+                                            if (statusForm != null && statusForm.id > 2) {
+                                                Row(
+                                                    modifier = Modifier.fillMaxWidth()
+                                                        .border(
+                                                            1.dp,
+                                                            Color.Gray
+                                                        )
+                                                ) {
 
-
+                                                    Column(
+                                                        modifier = Modifier.fillMaxWidth(
+                                                            0.5f
+                                                        )
+                                                            .padding(start = 10.dp),
+                                                        horizontalAlignment = Alignment.CenterHorizontally
+                                                    ) {
+                                                        Text(
+                                                            text = student.name
+                                                        )
+                                                    }
+                                                    var color = ""
+                                                    if (statusForm.color.startsWith(
+                                                            "#"
+                                                        )
+                                                    ) {
+                                                        color =
+                                                            statusForm.color
+                                                    } else {
+                                                        color =
+                                                            "#" + statusForm.color
+                                                    }
+                                                    val objetCouleur = Color(
+                                                        android.graphics.Color.parseColor(
+                                                            color
+                                                        )
+                                                    )
+                                                    Column(
+                                                        modifier = Modifier.fillMaxWidth(0.5f)
+                                                            .background(
+                                                                objetCouleur
+                                                            )
+                                                            .padding(
+                                                                top = 20.dp,
+                                                                bottom = 20.dp
+                                                            ),
+                                                        horizontalAlignment = Alignment.CenterHorizontally
+                                                    ) {
+                                                        Text(
+                                                            text = statusForm.name,
+                                                            textAlign = TextAlign.Center,
+                                                        )
+                                                    }
                                     }
                                 }
                             }

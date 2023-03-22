@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
+import com.example.projetandroidss.ui.theme.bgGray
 import com.example.projetandroidss.viewModel.*
 import java.text.SimpleDateFormat
 
@@ -33,7 +34,7 @@ class StudentInfoActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = bgGray
                 ) {
                     Box(
                         modifier = Modifier
@@ -42,9 +43,16 @@ class StudentInfoActivity : ComponentActivity() {
                     ) {
                         val idStudent = intent.getSerializableExtra("idStudent") as? Int
                         val student = StudentViewModel(application).getById(idStudent!!)
+                        val idInit = intent.getSerializableExtra("idInitLogin") as Int
+                        val initiateur = InitiatorViewModel(application).getById(idInit)
                         val deepBlue = Color(0xFF004794)
                         if (student != null) {
                             Column(modifier = Modifier.fillMaxWidth()) {
+                                Row(modifier = Modifier.fillMaxWidth()) {
+                                    if (initiateur != null) {
+                                        TopNavigation(initiateur.id, this@StudentInfoActivity)
+                                    }
+                                }
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.Center
@@ -56,10 +64,9 @@ class StudentInfoActivity : ComponentActivity() {
                                             textAlign = TextAlign.Center,
                                             fontWeight = FontWeight.Bold,
                                             fontSize = 20.sp,
-                                            color = Color.White,
+                                            color = deepBlue,
                                             modifier = Modifier
                                                 .fillMaxWidth()
-                                                .background(deepBlue)
                                                 .padding(16.dp)
                                         )
                                     }
@@ -178,7 +185,7 @@ class StudentInfoActivity : ComponentActivity() {
                                                                             .border(
                                                                                 1.dp,
                                                                                 Color.Gray
-                                                                            )
+                                                                            ).background(Color.White)
                                                                     ) {
                                                                         Column(
                                                                             modifier = Modifier.fillMaxWidth(

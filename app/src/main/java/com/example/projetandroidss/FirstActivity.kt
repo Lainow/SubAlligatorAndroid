@@ -33,12 +33,14 @@ class FirstActivity : ComponentActivity() {
                         startActivity(intent)
                     }
                     ) {
-                        Text("Connexion Sub'Alligator",
+                        Text("Se connecter à Sub'Alligator",
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.Bold,
                             fontSize = 35.sp,
                             color = Color.White)
                     }
+                    val intent = Intent(this@FirstActivity, LoginActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }

@@ -3,4 +3,6 @@
     <string name="title_activity_compose">HomeActivity</string>
     <string name="title_activity_first">FirstActivity</string>
     <string name="title_activity_session">SessionActivity</string>
+    <string name="title_activity_session_list">SessionListActivity</string>
+    <string name="title_activity_student_list">StudentListActivity</string>
 </resources>

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.entities.Initiator
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
+import com.example.projetandroidss.ui.theme.bgGray
 import com.example.projetandroidss.viewModel.InitiatorViewModel
 
 val deepBlue = Color(0xFF004794)
@@ -42,24 +43,31 @@ class ProfileActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = bgGray
                 ) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .verticalScroll(rememberScrollState())
                     ) {
-                        val idInit = intent.getSerializableExtra("idInitiateur") as? Int
-                        val initiator = InitiatorViewModel(application).getById(idInit!!)
+                        val idInit = intent.getSerializableExtra("idInitiateur") as Int
+                        val initiateur = InitiatorViewModel(application).getById(idInit)
+
                         var modifRow = Modifier
                             .fillMaxWidth()
-                            .border(1.dp, Color.Gray)
+                            .border(1.dp, Color.Gray).background(Color.White)
                         var modifRow2 = Modifier
                             .fillMaxWidth()
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
                         ) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                if (initiateur != null) {
+                                    TopNavigation(initiateur.id, this@ProfileActivity)
+                                }
+                            }
+
                             Row(
                                 modifier = modifRow2,
                                 verticalAlignment = Alignment.CenterVertically
@@ -69,24 +77,23 @@ class ProfileActivity : ComponentActivity() {
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 20.sp,
-                                    color = Color.White,
+                                    color = deepBlue,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .background(deepBlue)
                                         .padding(16.dp)
                                 )
                             }
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(20.dp)
+                                    .padding(start = 20.dp, end = 20.dp)
                             ) {
-                                if (initiator != null) {
-                                    var nom = remember { mutableStateOf(initiator.name) }
-                                    var email = remember { mutableStateOf(initiator.email) }
-                                    var motdepasse = remember { mutableStateOf(initiator.password) }
-                                    var isDirector = remember { mutableStateOf(initiator.director) }
-                                    var level = remember { mutableStateOf(initiator.levelId) }
+                                if (initiateur != null) {
+                                    var nom = remember { mutableStateOf(initiateur.name) }
+                                    var email = remember { mutableStateOf(initiateur.email) }
+                                    var motdepasse = remember { mutableStateOf(initiateur.password) }
+                                    var isDirector = remember { mutableStateOf(initiateur.director) }
+                                    var level = remember { mutableStateOf(initiateur.levelId) }
                                     var expanded = remember { mutableStateOf(false) }
                                     Row(
                                         modifier = modifRow,
@@ -237,7 +244,7 @@ class ProfileActivity : ComponentActivity() {
                                                         motdepasse.value,
                                                         isDirector.value,
                                                         level.value,
-                                                        initiator.deleted
+                                                        initiateur.deleted
                                                     )
                                                 )
                                             }.start()

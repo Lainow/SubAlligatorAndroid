@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetandroidss.entities.Initiator
 import com.example.projetandroidss.ui.theme.ProjetAndroidSSTheme
+import com.example.projetandroidss.ui.theme.bgGray
 import com.example.projetandroidss.viewModel.InitiatorViewModel
 import com.example.projetandroidss.viewModel.SessionViewModel
 
@@ -36,10 +37,12 @@ class SessionActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = bgGray
                 ) {
                     val idFrom = intent.getSerializableExtra("idFormation") as Int
                     val sessionFom = SessionViewModel(application).getByFormationId(idFrom)
+                    val idInit = intent.getSerializableExtra("idInitLogin") as Int
+                    val initiateur = InitiatorViewModel(application).getById(idInit)
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -54,6 +57,14 @@ class SessionActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxWidth()
                         ) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                if (initiateur != null) {
+                                    TopNavigation(initiateur.id, this@SessionActivity)
+                                }
+                            }
+
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                            }
                             Row(
                                 modifier = modifRow2,
                                 verticalAlignment = Alignment.CenterVertically
@@ -63,17 +74,16 @@ class SessionActivity : ComponentActivity() {
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 20.sp,
-                                    color = Color.White,
+                                    color = deepBlue,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .background(deepBlue)
                                         .padding(16.dp)
                                 )
                             }
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(20.dp)
+                                    .padding(end = 25.dp, start = 25.dp)
                             ) {
                                 if (sessionFom != null) {
                                     Row(
@@ -91,7 +101,6 @@ class SessionActivity : ComponentActivity() {
                                                 fontWeight = FontWeight.Bold,
                                                 modifier = Modifier
                                                     .fillMaxWidth()
-                                                    .padding(16.dp)
                                             )
                                         }
                                     }
@@ -111,7 +120,7 @@ class SessionActivity : ComponentActivity() {
                                                 Column(
                                                     modifier = Modifier
                                                         .fillMaxWidth()
-                                                        .padding(end = 5.dp)
+                                                        .padding(end = 5.dp).background(Color.White)
                                                 ) {
                                                     Text(
                                                         text = jour + "/" + mois + "/" + annee,

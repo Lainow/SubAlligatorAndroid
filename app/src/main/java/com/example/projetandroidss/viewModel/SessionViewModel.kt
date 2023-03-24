@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.projetandroidss.ApiService
 import com.example.projetandroidss.BDD
 import com.example.projetandroidss.entities.Session
+import com.example.projetandroidss.entities.Student
 import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +25,7 @@ class SessionViewModel  (app: Application) : AndroidViewModel(app) {
             val apiGet = Api.getSession().execute().body()
             return Gson().toJson(apiGet)
         }
+
     }
 
 
@@ -69,5 +71,13 @@ class SessionViewModel  (app: Application) : AndroidViewModel(app) {
         thread.start()
         thread.join()
         return liste
+    }
+
+    fun getById(i: Int): Session? {
+        var session: Session? = null;
+        var thread = Thread() { session = bdd.sessionDao().getById(i) }
+        thread.start()
+        thread.join()
+        return session
     }
 }

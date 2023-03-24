@@ -15,4 +15,7 @@ interface ParticipationDao {
 
     @Query("SELECT * FROM participation where studentId = :studentId and contentId = :contentId")
     fun getByStudentAndContentId(studentId: Int, contentId: Int): List<Participation>
+
+    @Query("SELECT * FROM participation where contentId = :contentId")
+    fun getByContentId(contentId: Int): List<Participation>
 }

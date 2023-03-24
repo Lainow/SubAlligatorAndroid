@@ -4,8 +4,8 @@
 Écran de connexion ✅
 Écran de profil ✅
 Liste des formations (liste simple) ✅
-Progression dans la formation (tableau)
-Évaluation d'une séance (master/detail) : liste des élèves ✅ + évaluation d'un élève
+Progression dans la formation (tableau)✅
+Évaluation d'une séance (master/detail) : liste des élèves ✅ + évaluation d'un élève ✅
 Responsive Portrait ou Paysage ✅
 **Architecture**
 Une (ou +) page(s) en Compose ✅
@@ -19,4 +19,4 @@ Liste des séances
 **Accès au serveur**
 Récupérer les trois listes (-> BDD locale) ✅
 Valider Login ✅
-Modifier profil 
+Modifier profil ✅

@@ -1,5 +1,6 @@
 package com.example.projetandroidss
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -114,21 +115,37 @@ class SessionActivity : ComponentActivity() {
                                             val partiesJ = (jourT).split("T")
                                             val jour = partiesJ[0]
                                             Row(
-                                                modifier = modifRow,
-                                                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .border(1.dp, Color.Gray).background(Color.White),
+                                                verticalAlignment = Alignment.CenterVertically
                                             ) {
+                                                Column(modifier = Modifier.fillMaxWidth(0.55f)) {
+                                                    Text(
+                                                        text = jour + "/" + mois + "/" + annee,
+                                                        modifier = Modifier.padding(
+                                                            end = 16.dp,
+                                                            start = 16.dp
+                                                        )
+                                                    )
+                                                }
                                                 Column(
                                                     modifier = Modifier
                                                         .fillMaxWidth()
-                                                        .padding(end = 5.dp).background(Color.White)
+                                                        .padding(end = 5.dp)
                                                 ) {
-                                                    Text(
-                                                        text = jour + "/" + mois + "/" + annee,
-                                                        textAlign = TextAlign.Center,
-                                                        modifier = Modifier
-                                                            .fillMaxWidth()
-                                                            .padding(16.dp)
+                                                    Button(modifier = Modifier.fillMaxWidth(), onClick = { val intentSe = Intent(
+                                                        this@SessionActivity,
+                                                        SessionInfoActivity::class.java
                                                     )
+                                                        intentSe.putExtra("idSession", data.id)
+                                                        if (initiateur != null) {
+                                                            intentSe.putExtra("idInitLogin", initiateur.id)
+                                                        }
+                                                        startActivity(intentSe)
+                                                    }) {
+                                                        Text("Plus d'info")
+                                                    }
                                                 }
                                             }
                                         }

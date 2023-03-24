@@ -107,13 +107,20 @@ class SessionListActivity : ComponentActivity() {
                                                 .fillMaxWidth()
                                                 .padding(end = 5.dp)
                                         ) {
-                                            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                                            Button(modifier = Modifier.fillMaxWidth(), onClick = { val intentSe = Intent(
+                                                this@SessionListActivity,
+                                                SessionInfoActivity::class.java
+                                            )
+                                                intentSe.putExtra("idSession", data.id)
+                                                if (initiateur != null) {
+                                                    intentSe.putExtra("idInitLogin", initiateur.id)
+                                                }
+                                                startActivity(intentSe)
                                             }) {
                                                 Text("Plus d'info")
                                             }
                                         }
                                     }
-
                                 }
                             }
                         }

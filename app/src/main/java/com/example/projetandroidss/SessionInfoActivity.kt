@@ -3,15 +3,12 @@ package com.example.projetandroidss
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -188,41 +185,57 @@ class SessionInfoActivity : ComponentActivity() {
                                                                         )
                                                                     }
                                                                     var color = ""
-                                                                    if (statusSession.id == 2){
-                                                                        color = "#FF6666"
-                                                                    }
-                                                                    else {
-                                                                        if (statusSession.color.startsWith(
-                                                                                "#"
-                                                                            )
-                                                                        ) {
-                                                                            color =
-                                                                                statusSession.color
-                                                                        } else {
-                                                                            color =
-                                                                                "#" + statusSession.color
-                                                                        }
-                                                                    }
-                                                                    val objetCouleur = Color(
-                                                                        android.graphics.Color.parseColor(
-                                                                            color
-                                                                        )
-                                                                    )
+                                                                    if (statusSession.color.startsWith("#")) color = statusSession.color
+                                                                    else color = "#" + statusSession.color
+                                                                    var objetCouleur = Color(android.graphics.Color.parseColor(color))
+                                                                    if (statusSession.id == 2) {objetCouleur = Color(0xFFFF5555)}
                                                                     Column(
-                                                                        modifier = Modifier.fillMaxWidth()
+                                                                        modifier = Modifier
+                                                                            .fillMaxWidth()
                                                                             .background(
                                                                                 objetCouleur
                                                                             )
                                                                             .padding(
                                                                                 top = 20.dp,
                                                                                 bottom = 20.dp
-                                                                            ),
-                                                                        horizontalAlignment = Alignment.CenterHorizontally
+                                                                            )
                                                                     ) {
-                                                                        Text(
-                                                                            text = statusSession.name,
-                                                                            textAlign = TextAlign.Center,
-                                                                        )
+                                                                        var selectedItem = remember { mutableStateOf(statusSession) }
+                                                                        val options = StatusViewModel(application).getAll()
+                                                                        if (options != null) {
+                                                                            var dropdownExpanded = remember { mutableStateOf(false) }
+                                                                            Box(
+                                                                                modifier = Modifier
+                                                                                    .fillMaxWidth()
+                                                                                    .clickable {
+                                                                                        dropdownExpanded.value =
+                                                                                            true
+                                                                                    },
+                                                                                contentAlignment = Alignment.Center
+                                                                            ) {
+                                                                                Text(text =selectedItem.value.name)
+                                                                                DropdownMenu(
+                                                                                    expanded = dropdownExpanded.value,
+                                                                                    onDismissRequest = { dropdownExpanded.value = false }
+                                                                                ) {
+                                                                                    options.forEach { option ->
+                                                                                        DropdownMenuItem(onClick = {
+                                                                                            selectedItem.value = option
+                                                                                            dropdownExpanded.value = false
+                                                                                            ParticipationViewModel(application).updateStatus(
+                                                                                                parti,
+                                                                                                option.id
+                                                                                            )
+                                                                                        }) {
+                                                                                            Text(
+                                                                                                text = option.name,
+                                                                                                textAlign = TextAlign.Center,
+                                                                                            )
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                             }

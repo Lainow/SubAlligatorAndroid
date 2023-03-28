@@ -70,8 +70,8 @@ class StatusViewModel (app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun getAll(): LiveData<List<Status>>? {
-        var liste: LiveData<List<Status>>? = null;
+    fun getAll(): List<Status>? {
+        var liste: List<Status>? = null;
         var thread = Thread() { liste = bdd.statusDao().getAllStatus() }
         thread.start()
         thread.join()

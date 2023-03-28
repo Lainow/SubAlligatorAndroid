@@ -79,5 +79,12 @@ class ParticipationViewModel (app: Application) : AndroidViewModel(app) {
         return liste
     }
 
+    fun updateStatus(participation : Participation, statusId : Int) {
+        participation.statusId = statusId
+        var thread = Thread() {bdd.participationDao().updateStatus(participation) }
+        thread.start()
+        thread.join()
+    }
+
 
 }

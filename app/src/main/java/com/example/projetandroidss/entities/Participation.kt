@@ -26,6 +26,6 @@ class Participation(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val contentId: Int,
     val studentId: Int,
-    val statusId: Int,
+    var statusId: Int,
     val commentary: String?
 )

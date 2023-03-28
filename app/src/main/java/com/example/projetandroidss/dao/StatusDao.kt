@@ -11,7 +11,7 @@ import com.example.projetandroidss.entities.Status
 @Dao
 interface StatusDao {
     @Query("SELECT * FROM status")
-    fun getAllStatus(): LiveData<List<Status>>
+    fun getAllStatus(): List<Status>
 
     @Insert fun insert(vararg status: Status)
 

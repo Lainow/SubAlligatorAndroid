@@ -14,7 +14,7 @@
 - **Base de données**
   - Liste des formations ✅
   - Liste des étudiants ✅
-  - Liste des séances 
+  - Liste des séances ✅
   - Évaluations ✅
 - **Accès au serveur**
   - Récupérer les trois listes (-> BDD locale) ✅
